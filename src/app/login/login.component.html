@@ -1,0 +1,29 @@
+<div class="body">
+    <div fxLayoutAlign="center center" fxFlexFill>
+        <mat-card class="bg-login" fxFlex="40">
+            <mat-card-header>         
+                <mat-card-title>
+                    <mat-icon>person</mat-icon>
+                    Login
+              </mat-card-title> 
+            </mat-card-header>
+            <mat-card-content>
+                <form class="example-form" fxLayoutAlign="stretch" fxLayout="column">
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="username" id="username" placeholder="username" [(ngModel)]="username" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput type="password" name="password" id="password" placeholder="password" [(ngModel)]="password" required>
+                    </mat-form-field>
+                </form>
+                <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+            </mat-card-content>
+            <div *ngIf="errorMessage !== ''" class="alert alert-danger">
+                {{errorMessage}}
+            </div>
+            <mat-card-actions>
+                <button mat-raised-button (click)="login()" color="primary">Login</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.image {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.heading-center {
+    text-align: center;
+    display: inline-block;
+    color: firebrick;
+}
+
+.size {
+    height: 100px;
+    /*border-bottom: 2px solid #eeeeee;*/
+}
+
+.fs-29 {
+    font-size: 29px;
+}
+
+.bg-header {
+    background: linear-gradient(#dedede, #ffffff);
+}

@@ -1,0 +1,31 @@
+.heading-center {
+    text-align: center;
+    
+}
+
+.link {
+    text-decoration: none;
+    color: firebrick;
+
+}
+
+.body {
+    /*border-top: 1px solid #eeeeee; */
+}
+
+.fs-14 {
+    font-size: 16px;
+    line-height: 2;
+}
+
+lh-1 {
+    line-height: 1;
+}
+
+.mth {
+    height: 235px;
+}
+
+.bg-footer {
+    background: linear-gradient(to top, #dedede, #ffffff);
+}

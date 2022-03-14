@@ -1,0 +1,8 @@
+.body {
+    height: calc(100vh - 101px);
+}
+
+.size {
+    width: 500px;
+    height: 250px;
+}

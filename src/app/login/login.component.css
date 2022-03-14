@@ -1,0 +1,26 @@
+
+.example-card {
+    width: 400px;
+    margin: 10% auto;
+  }
+  .mat-card-title{
+    font-size: 16px;
+  }
+
+.body {
+    height: calc(100vh - 101px);
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-size: cover;
+    background-image: url("/assets/login_bg2.jpg");
+}
+
+.size {
+    width: 500px;
+    height: 250px;
+}
+
+.bg-login {
+  background-color: rgba(255, 255, 255, 0.7);
+}
