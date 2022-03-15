@@ -23,7 +23,6 @@ export class LoginService {
   }
 
   public async doLogin(username: string, password: string): Promise<any> {
-    console.log(username + "  " + password);
 
       let body = new URLSearchParams();
       body.set('username', username);
@@ -38,7 +37,29 @@ export class LoginService {
       return await this.http.post<any>(finalPath, body.toString(), options).toPromise();
   }
 
-  public refreshToken() {
+  async refreshToken() {
+    const my_token = this.getRefreshToken();
+
+    const header =  new HttpHeaders({
+        'Authorization': 'Bearer ' + my_token,
+         'Content-Type': 'application/json'
+            });
+
+    let options = {
+      headers: header
       
+  };
+
+     return await this.http.get<any>(this.path + "api/token/refresh", options).toPromise();
+  }
+
+  private getRefreshToken(): string {
+    const token = window.localStorage.getItem('refresh_token');
+
+    if(token !== null) {
+      return token;
+    }
+
+    return "";
   }
 }

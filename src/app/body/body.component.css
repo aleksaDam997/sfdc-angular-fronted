@@ -6,3 +6,34 @@
     width: 500px;
     height: 250px;
 }
+
+.m-f-i {
+    margin: 24px 7px;
+}
+
+table{
+    height: calc(100vh - 310px);
+    cursor: pointer;
+}
+
+tbody {
+    display: block;
+    overflow: auto;
+    height: calc(100vh - 230px);
+    border-bottom: 2px solid white;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
