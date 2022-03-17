@@ -1,0 +1,60 @@
+<mat-dialog-content class="dialog">
+  <div fxLayout="row" fxLayoutAlign="end start" >
+    <div>
+      <button mat-icon-button class="close" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="warn">close</mat-icon>
+      </button>
+      </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" >
+<div>
+  <h2 class="text-danger">Dodaj kategoriju</h2>
+</div>
+</div>
+
+<form [formGroup]="addCatForm" class="normal-form" (ngSubmit)="saveCategory(addCatForm.value)">
+  <mat-grid-tile-header></mat-grid-tile-header>
+  <mat-grid-list cols="2" rowHeight="340px" class="grid-layout-custom">
+    <mat-grid-tile >
+      <div class="controls-container">
+        <h3 class="text-danger">Naziv i kratak opis: </h3>
+      <mat-form-field>
+        <input matInput placeholder="Naziv" formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Kratak opis" formControlName="excerpt"></textarea>
+      </mat-form-field>
+      <h3 class="text-danger">Nazivi vrijednosti: </h3>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 1" formControlName="value1">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 2" formControlName="value2">
+      </mat-form-field>
+    </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controls-container">
+        <mat-form-field>
+          <input matInput placeholder="Vrijednost 3" formControlName="value3" >
+        </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 4" formControlName="value4" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 5" formControlName="value5" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 6" formControlName="value6">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Vrijednost 7" formControlName="value7" >
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="warn" [mat-dialog-close]="true" fxLayout="column">Dodaj</button>
+    </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</form>
+</mat-dialog-content>
+

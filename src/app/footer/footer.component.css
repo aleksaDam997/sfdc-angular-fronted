@@ -9,10 +9,6 @@
 
 }
 
-.body {
-    /*border-top: 1px solid #eeeeee; */
-}
-
 .fs-14 {
     font-size: 16px;
     line-height: 2;
@@ -27,5 +23,5 @@ lh-1 {
 }
 
 .bg-footer {
-    background: linear-gradient(to top, #dedede, #ffffff);
+    background: linear-gradient(to top, #eeeeee, #ffffff);
 }

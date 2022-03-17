@@ -1,32 +1,43 @@
 <div mat-card class="body">
     <div mat-card-title fxLayoutAlign="center center" fxAlign="row">
-        <label mat-label for="category" class="m-f-i">Kategorija: </label>
-        <select mat-select name="category" id="category" class="m-f-i">
-            <option *ngFor="let cat of categories" mat-option value="cat.categoryId">{{cat.name}}</option>
+        <label mat-label for="category" class="m-f-i f-s-20">Kategorija #{{category?.categoryId}} : </label>
+        <select mat-select name="category" id="category" class="m-f-i f-s-18" (click)="onSelectChange($event)">
+            <option mat-option *ngFor="let cat of categories" [value]="cat.categoryId" class="f-s-16">{{cat.name}}</option>
 
         </select>
         <div mat-card-action>
-        <button class="btn btn-primary m-f-i">Filter</button>
-        <button class="btn btn-danger m-f-i">Add category</button>
-        <button class="btn btn-success m-f-i">Print</button>
+        <button class="btn btn-primary m-f-i" (click)="filterCategories()">Filter</button>
+        <button class="btn btn-danger m-f-i" (click)="openDialog()">Add category</button>
+        <button class="btn btn-success m-f-i"  [useExistingCss]="true" printTitle="MyTitle" printSectionId="print-section" ngxPrint>Print</button>
         </div>
     </div>
     <div mat-card-content>
-        <table class="table table-light table-striped">
+        <! ––  table-bordered mogu dodati ––>
+        <table class="table table-light table-striped table-hover" id="print-section" ngxPrint>
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Kreirano</th>
-                    <th scope="col">{{category?.value1}}</th>
-                    <th scope="col">{{category?.value2}}</th>
+                    <th *ngIf="category?.value1 !== null" scope="col">{{category?.value1}}</th>
+                    <th *ngIf="category?.value2 !== null" scope="col">{{category?.value2}}</th>
+                    <th *ngIf="category?.value3 !== null" scope="col">{{category?.value3}}</th>
+                    <th *ngIf="category?.value4 !== null" scope="col">{{category?.value4}}</th>
+                    <th *ngIf="category?.value5 !== null" scope="col">{{category?.value5}}</th>
+                    <th *ngIf="category?.value6 !== null" scope="col">{{category?.value6}}</th>
+                    <th *ngIf="category?.value7 !== null" scope="col">{{category?.value7}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of category?.data">
                   <th scope="row">{{data.dataId}}</th>
                   <td>{{data.createdAt}}</td>
-                  <td>{{data.value1}}</td>
-                  <td>{{data.value2}}</td>
+                  <td *ngIf="data.value1 !== 0">{{data.value1}}</td>
+                  <td *ngIf="data.value2 !== 0">{{data.value2}}</td>
+                  <td *ngIf="data.value3 !== 0">{{data.value3}}</td>
+                  <td *ngIf="data.value4 !== 0">{{data.value4}}</td>
+                  <td *ngIf="data.value5 !== 0">{{data.value5}}</td>
+                  <td *ngIf="data.value6 !== 0">{{data.value6}}</td>
+                  <td *ngIf="data.value7 !== 0">{{data.value7}}</td>
                 </tr>
               </tbody>
         </table>

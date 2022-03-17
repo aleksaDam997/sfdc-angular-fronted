@@ -7,7 +7,6 @@ import { HeaderComponent } from './header/header.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,11 +14,17 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BodyComponent } from './body/body.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import { PopUpComponent } from './pop-up/pop-up.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import { NgxPrintModule } from 'ngx-print';
+
+
 
 
 @NgModule({
@@ -28,7 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     HeaderComponent,
     BodyComponent,
     LoginComponent,
-    FooterComponent
+    FooterComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,
@@ -41,13 +47,18 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatButtonModule,
     HttpClientModule,
     MatDialogModule,
-    MatTableModule
-    
+    MatTableModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatInputModule,    
+    NgxPrintModule
   ],
+  exports: [MatGridListModule, MatInputModule, MatFormFieldModule, ],
   providers: [],
   bootstrap: [AppComponent]
 })

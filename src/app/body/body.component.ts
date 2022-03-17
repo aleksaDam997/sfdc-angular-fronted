@@ -5,6 +5,8 @@ import { Cat } from '../dto/cat.dto';
 import { Category } from '../dto/category.dto';
 import { LoginService } from '../service/login.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-body',
@@ -15,11 +17,20 @@ export class BodyComponent implements OnInit {
 
   public categories: Cat[] = [];
   public category?: Category;
+  public categoryId?: number;
 
   public showSpinner: boolean = false;
 
-  constructor(private apiService: ApiService, private loginService: LoginService, private router: Router) {
+  constructor(private apiService: ApiService, private loginService: LoginService, private router: Router,
+    private dialogRef: MatDialog) {
     this.fetchCategories();
+   }
+
+   openDialog() {
+     this.dialogRef.open(PopUpComponent, {
+       data: this.categoryId,
+       disableClose: true
+     });
    }
 
   ngOnInit(): void {
@@ -32,10 +43,13 @@ export class BodyComponent implements OnInit {
 
       this.setCats(cats);
 
-      
-      this.fetchCategory(this.categories[0].categoryId);
+      this.categoryId = this.categories[0].categoryId
+      this.fetchCategory(this.categoryId);
 
     }).catch(err => {
+
+      console.log(err)
+      console.log(err.status)
 
       if(err.status === 403) {
 
@@ -49,6 +63,9 @@ export class BodyComponent implements OnInit {
             const cats: Cat[] = res;
       
             this.setCats(cats);
+
+            this.categoryId = this.categories[0].categoryId
+            this.fetchCategory(this.categoryId);
           });
           
         }).catch(err => {
@@ -57,6 +74,8 @@ export class BodyComponent implements OnInit {
           }
         })
       }
+        this.router.navigate(['/login']);
+
     });
 
 
@@ -77,8 +96,21 @@ export class BodyComponent implements OnInit {
         name: cat.name,
         excerpt: cat.excerpt,
         current: false
+    });
+    this.categories[0].current = true;
+    console.log(this.categories);
     })
-    })
+  }
+
+  onSelectChange(event: Event): void {
+    this.categoryId = Number((event.target as HTMLSelectElement).value);
+
+    console.log(this.categoryId);
+  }
+
+  filterCategories(): void {
+    if(this.categoryId !== undefined)
+    this.fetchCategory(this.categoryId);
   }
 
   private setCategory(category: Category) {
