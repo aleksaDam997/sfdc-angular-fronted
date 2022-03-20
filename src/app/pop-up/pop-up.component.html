@@ -14,12 +14,12 @@
 
 <form [formGroup]="addCatForm" class="normal-form" (ngSubmit)="saveCategory(addCatForm.value)">
   <mat-grid-tile-header></mat-grid-tile-header>
-  <mat-grid-list cols="2" rowHeight="340px" class="grid-layout-custom">
+  <mat-grid-list cols="2" rowHeight="360px" class="grid-layout-custom">
     <mat-grid-tile >
       <div class="controls-container">
         <h3 class="text-danger">Naziv i kratak opis: </h3>
-      <mat-form-field>
-        <input matInput placeholder="Naziv" formControlName="name">
+      <mat-form-field class="z-i-100">
+        <input class="z-i-100" matInput placeholder="Naziv" formControlName="name">
       </mat-form-field>
       <mat-form-field>
         <textarea matInput placeholder="Kratak opis" formControlName="excerpt"></textarea>
@@ -50,7 +50,10 @@
       <mat-form-field>
         <input matInput placeholder="Vrijednost 7" formControlName="value7" >
       </mat-form-field>
-      <button mat-raised-button type="submit" color="warn" [mat-dialog-close]="true" fxLayout="column">Dodaj</button>
+      <button [disabled]="!addCatForm.valid" mat-raised-button type="submit" color="warn" fxLayout="column">Dodaj</button>
+        <div *ngIf="messageState" class="alert alert-success">
+          <h4>{{message}}</h4>
+        </div>
     </div>
     </mat-grid-tile>
 

@@ -23,6 +23,9 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import { NgxPrintModule } from 'ngx-print';
+import { TrainNeuralNetworkComponent } from './train-neural-network/train-neural-network.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
@@ -34,7 +37,8 @@ import { NgxPrintModule } from 'ngx-print';
     BodyComponent,
     LoginComponent,
     FooterComponent,
-    PopUpComponent
+    PopUpComponent,
+    TrainNeuralNetworkComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { NgxPrintModule } from 'ngx-print';
     MatDialogModule,
     MatGridListModule,
     MatInputModule,    
-    NgxPrintModule
+    NgxPrintModule,
+    MatCheckboxModule
+    
   ],
   exports: [MatGridListModule, MatInputModule, MatFormFieldModule, ],
   providers: [],

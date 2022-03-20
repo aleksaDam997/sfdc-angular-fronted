@@ -86,6 +86,22 @@ export class BodyComponent implements OnInit {
 
       this.setCategory(res);
       console.log(this.category);
+    }).catch(err => {
+
+      if(err.status === 403) {
+
+        this.loginService.refreshToken().then(res => {
+
+          window.localStorage.setItem("access_token", res.access_token);
+          window.localStorage.setItem("refresh_token", res.refresh_token);
+
+          this.fetchCategory(this.categoryId!);    
+            
+        }).catch(err => {
+
+        this.router.navigate(['/login']);
+        });
+      }
     });
   }
 
@@ -144,6 +160,13 @@ export class BodyComponent implements OnInit {
       }
       )
     });
+}
 
+logout(): void {
+  window.localStorage.removeItem('access_token');
+  window.localStorage.removeItem('refresh_token');
+  window.localStorage.clear();
+
+  this.router.navigate(['/login']);
 }
   }

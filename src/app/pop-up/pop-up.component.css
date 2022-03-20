@@ -34,6 +34,10 @@
 
     }
 
+    .z-i-100 {
+      z-index: 100;
+    }
+
   .dialog::before {
     /* background: url("/images/home-background.png") center center / cover 
     no-repeat fixed; */
@@ -46,7 +50,7 @@
     z-index: 1;
     pointer-events: none;
 
-    background-color: rgba(0, 0, 0, 0.05);
+    /* background-color: rgba(0, 0, 0, 0); */
   }
 
   .form-height {

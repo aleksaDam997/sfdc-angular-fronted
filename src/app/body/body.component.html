@@ -1,19 +1,20 @@
 <div mat-card class="body">
+    <button color="primary" class="button" mat-raised-button><mat-icon class="mat-icon-rtl-mirror icon" (click)="logout()">logout</mat-icon></button>
     <div mat-card-title fxLayoutAlign="center center" fxAlign="row">
         <label mat-label for="category" class="m-f-i f-s-20">Kategorija #{{category?.categoryId}} : </label>
         <select mat-select name="category" id="category" class="m-f-i f-s-18" (click)="onSelectChange($event)">
             <option mat-option *ngFor="let cat of categories" [value]="cat.categoryId" class="f-s-16">{{cat.name}}</option>
-
         </select>
         <div mat-card-action>
         <button class="btn btn-primary m-f-i" (click)="filterCategories()">Filter</button>
         <button class="btn btn-danger m-f-i" (click)="openDialog()">Add category</button>
         <button class="btn btn-success m-f-i"  [useExistingCss]="true" printTitle="MyTitle" printSectionId="print-section" ngxPrint>Print</button>
-        </div>
+        <a *ngIf="category?.name === 'xor'" [routerLink]="['/train', category?.categoryId]" class="btn btn-warning">Train nn</a>
     </div>
-    <div mat-card-content>
+    </div>
+    <div mat-card-content id="print-section">
         <! ––  table-bordered mogu dodati ––>
-        <table class="table table-light table-striped table-hover" id="print-section" ngxPrint>
+        <table class="table table-light table-striped table-hover" ngxPrint>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -31,13 +32,13 @@
                 <tr *ngFor="let data of category?.data">
                   <th scope="row">{{data.dataId}}</th>
                   <td>{{data.createdAt}}</td>
-                  <td *ngIf="data.value1 !== 0">{{data.value1}}</td>
-                  <td *ngIf="data.value2 !== 0">{{data.value2}}</td>
-                  <td *ngIf="data.value3 !== 0">{{data.value3}}</td>
-                  <td *ngIf="data.value4 !== 0">{{data.value4}}</td>
-                  <td *ngIf="data.value5 !== 0">{{data.value5}}</td>
-                  <td *ngIf="data.value6 !== 0">{{data.value6}}</td>
-                  <td *ngIf="data.value7 !== 0">{{data.value7}}</td>
+                  <td *ngIf="data.value1 !== -1000">{{data.value1}}</td>
+                  <td *ngIf="data.value2 !== -1000">{{data.value2}}</td>
+                  <td *ngIf="data.value3 !== -1000">{{data.value3}}</td>
+                  <td *ngIf="data.value4 !== -1000">{{data.value4}}</td>
+                  <td *ngIf="data.value5 !== -1000">{{data.value5}}</td>
+                  <td *ngIf="data.value6 !== -1000">{{data.value6}}</td>
+                  <td *ngIf="data.value7 !== -1000">{{data.value7}}</td>
                 </tr>
               </tbody>
         </table>

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../service/api.service';
 
 @Component({
@@ -12,15 +12,20 @@ export class PopUpComponent implements OnInit {
 
   public done: boolean = false;
   public addCatForm: FormGroup;
+  name: string = '';
+  excerpt: string = '';
+
+  public message: string ='';
+  public messageState: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: number, private formBuilder: FormBuilder,
-  private apiService: ApiService) {
+  private apiService: ApiService, private dialogRef: MatDialogRef<PopUpComponent>) {
 
     
 
     this.addCatForm = this.formBuilder.group({
-      name: '',
-      excerpt: '',
+      'name': [this.name, Validators.required],
+      'excerpt': [this.excerpt, Validators.required],
       value1: '',
       value2: '',
       value3: '',
@@ -48,10 +53,24 @@ export class PopUpComponent implements OnInit {
     }
 
     this.apiService.addCategory(formToSend).then(res => {
-      console.log(res);
+
+      this.messageState = true;
+      this.message = "Uspjesno ste unijeli novu kategoriju";
+     
+      setTimeout(() => {
+        this.messageState = false;
+        this.message = '';
+      }, 1500);
+
     }).catch(err => {
       console.log(err);
     });
+
+    setTimeout(() => {
+      this.dialogRef.close();
+    }, 1500);
+    
+      
   }
 
   submitForm(data: any): void {

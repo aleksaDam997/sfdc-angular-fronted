@@ -1,0 +1,96 @@
+<mat-card class="h body">
+    <button color="primary" class="button" mat-raised-button (click)="logout()"><mat-icon class="mat-icon-rtl-mirror">logout</mat-icon></button>
+    <mat-card-header>
+        <mat-card-title fxLayout="row" fxLayoutAlign="space-between center" class="title">
+            <a [routerLink]="['/']"><mat-icon class="mat-icon-rtl-mirror icon">home</mat-icon></a>
+            <strong class="subtitle">
+            Obuči neuronsku mrežu: {{category?.name}}
+        </strong>
+        </mat-card-title>
+    </mat-card-header>
+    <hr>
+    <br>
+    <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+        <div class="mat-card mr-1">
+            <h3>Select inputs</h3>
+        <div *ngIf="val1 !== 2" class="form-check form-switch">
+            <label for="val1" class="form-check-label">{{category?.value1}}: </label>
+            <input class="form-check-input" id="val1" name="val1" type="checkbox" (change)="isChecked($event, 1, 0)">
+        </div>
+        <div *ngIf="val2 !== 2" class="form-check form-switch">
+            <label for="val2" class="form-check-label">{{category?.value2}}: </label>
+            <input class="form-check-input" id="val2" name="val2" type="checkbox" (change)="isChecked($event, 2, 0)" >
+        </div>
+        <div *ngIf="val3 !== 2" class="form-check form-switch">
+            <label for="val3" class="form-check-label">{{category?.value3}}: </label>
+            <input class="form-check-input" id="val3" name="val3" type="checkbox" (change)="isChecked($event, 3, 0)" >
+        </div>
+        <div *ngIf="val4 !== 2" class="form-check form-switch">
+            <label for="val4" class="form-check-label">{{category?.value4}}: </label>
+            <input class="form-check-input" id="val4" name="val4" type="checkbox" (change)="isChecked($event, 4, 0)">
+        </div>
+        </div>
+        <div class="mat-card ml-1">
+            <h3 class="">Select labels</h3>
+        <div *ngIf="val1 !== 1" class="form-check form-switch">
+            <label class="form-check-label" for="val11">{{category?.value1}}: </label>
+            <input class="form-check-input" id="val11" name="val11" type="checkbox" (change)="isChecked($event, 1, 1)">
+        </div>
+        <div *ngIf="val2 !== 1" class="form-check form-switch">
+            <label class="form-check-label" for="val22">{{category?.value2}}: </label>
+            <input class="form-check-input" id="val22" name="val22" type="checkbox" (change)="isChecked($event, 2, 1)" >
+        </div>
+        <div *ngIf="val3 !== 1" class="form-check form-switch">
+            <label class="form-check-label"  for="val33">{{category?.value3}}: </label>
+            <input class="form-check-input"  id="val33" name="val33" type="checkbox" (change)="isChecked($event, 3, 1)" >
+        </div>
+        <div *ngIf="val4 !== 1" class="form-check form-switch">
+            <label class="form-check-label" for="val44">{{category?.value4}}: </label>
+            <input class="form-check-input" id="val44" name="val44" type="checkbox" (change)="isChecked($event, 4, 1)" >
+        </div>
+        </div>
+    </mat-card-content>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-between center">
+        <div class="form-group mb-4" fxLayout="row">
+            <label class="label label-primary" for="numLayers">Broj slojeva: </label>
+            <input [(ngModel)]="numberOfLayers" (ngModelChange)="changeNumberOfNodes()" class="form-control ml-4" id="numLayers" name="numLayers" placeholder="Number of layers" type="number" step="1" value="3" min="1" max="10">
+        </div>
+        <div *ngFor="let i of arrayOfNodes; let indeks = index" class="form-group" fxLayout="row">
+            <label class="label" for=`layer${indeks}`>Broj cvorova za sloj: {{indeks + 1}}</label>
+            <input [(ngModel)]="arrayOfNodes[indeks]" class="form-control ml-4" id=`layer${indeks}` name=`layer${indeks}` placeholder="Number of nodes" type="number" step="1" value="2" min="1" max="64">
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        
+        <div class="form-group" fxLayout="row">
+        <label class="label" for="epochs">Broj epoha za treniranje</label>
+        <input [(ngModel)]="epochs" class="form-control" id="epochs" name="epochs" placeholder="Epochs to train" type="number" step="10" value="50000" min="1">
+        </div>
+        <button mat-raised-button color="warn" (click)="trainIGeuss()">Train nn</button>
+        <div *ngIf="trained" class="alert alert-success m-l-10" role="alert">
+            Training done..
+          </div>
+          <div *ngIf="error" class="alert alert-danger m-l-10" role="alert">
+            Error occured..
+          </div>
+    </mat-card-actions>
+    <br>
+    <div *ngIf="trainingDone" class="mat-card-content" fxLayout="row" fxLayoutAlign="center center">
+        <div class="form-group m-1">
+        <label for="input1" class="m-l-10 text text-dark">Input a: </label>
+        <input placeholder="0 ili 1" class="form-control" [(ngModel)]="input1" id="input1" name="input1" (ngModelChange)="onChange($event)" >
+        </div>
+        <div class="form-group m-1">
+            <label for="input2" class="m-l-10 text text-dark">Input b: </label>
+            <input placeholder="0 ili 1" class="form-control" [(ngModel)]="input2" id="input2" name="input1" (ngModelChange)="onChange($event)">
+            
+        </div>
+    </div>
+    <div *ngIf="trainingDone" class="form-group" fxLayout="row" fxLayoutAlign="center center">
+        <button [disabled]="!valid" class="m-l-10" mat-raised-button color="primary" (click)="predict()">Predict</button>
+        <h4 class="m-l-10 text text-primary">{{res}}</h4>
+        </div>
+
+
+</mat-card>

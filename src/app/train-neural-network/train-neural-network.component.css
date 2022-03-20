@@ -1,0 +1,54 @@
+.m-l-10 {
+    margin-left: 10px;
+}
+
+
+.title {
+    font-size: 22px;
+    color: black;
+    text-align: center;
+    margin: auto;
+}
+
+.text {
+    font-size: 18px;
+}
+
+.body {
+    height: calc(100vh - 101px);
+    overflow: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-size: cover;
+    background-image: url("/assets/nn-bg2.jpg");
+    position: relative;
+}
+
+.icon {
+    font-size: 32px;
+    color: firebrick;
+}
+
+.subtitle {
+    margin-left:10%;
+
+}
+
+.button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+}
+
+.ml-4 {
+    margin-left: 4px;
+    height: 40px;
+}
+
+.label {
+    margin-right: 2px;
+    color: firebrick;
+    font-size: 14px;
+}
